@@ -1,0 +1,29 @@
+---
+# Permit co-located instances for solitary minikube virtual machines.
+antiAffinity: "soft"
+clusterName: "elasticsearch"
+nodeGroup: "master"
+cluster.publish.timeout: "60s"
+discovery.find_peers_interval: "3s"
+discovery.cluster_formation_warning_timeout: "20s"
+replicas: 1
+
+# Shrink default JVM heap.
+esJavaOpts: "-Xmx128m -Xms128m"
+
+# Allocate smaller chunks of memory per pod.
+resources:
+  requests:
+    cpu: "100m"
+    memory: "512M"
+  limits:
+    cpu: "1000m"
+    memory: "1G"
+
+# Request smaller persistent volumes.
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: "standard"
+  resources:
+    requests:
+      storage: 200M

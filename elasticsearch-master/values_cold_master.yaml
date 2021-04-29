@@ -4,8 +4,8 @@ antiAffinity: "soft"
 clusterName: "elasticsearch"
 nodeGroup: "cold-master"
 cluster.publish.timeout: "60s"
-discovery.find_peers_interval: "3s"
-discovery.cluster_formation_warning_timeout: "20s"
+discovery.find_peers_interval: "60s"
+discovery.cluster_formation_warning_timeout: "60s"
 replicas: 1
 
 # Shrink default JVM heap.
@@ -32,4 +32,4 @@ volumeClaimTemplate:
 # such as elasticsearch.yml and log4j2.properties
 esConfig:
   elasticsearch.yml: |
-    node.attr.data: cold
+    node.roles: [ "master", "data_cold" ]
